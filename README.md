@@ -1,7 +1,5 @@
 # Features
 
-
-
 ## Tech Stack
 
 - **Frontend**: React 18, TypeScript, Vite, TailwindCSS, Zustand
