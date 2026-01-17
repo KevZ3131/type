@@ -48,8 +48,11 @@ export const authApi = {
 export const typingApi = {
   getLanguages: () => api.get('/typing/languages'),
   
-  getSnippet: (language: string) =>
-    api.get(`/typing/snippet?language=${language}`),
+  getSnippet: (language: string, useAI: boolean = false) =>
+    api.get(`/typing/snippet?language=${language}&ai=${useAI}`),
+  
+  generateSnippet: (language: string) =>
+    api.post('/typing/generate', { language }),
   
   getSnippets: (language: string, count: number = 3) =>
     api.get(`/typing/snippets?language=${language}&count=${count}`),
