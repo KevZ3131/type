@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import VimEditor from '../components/VimEditor'
 import { useGameStore, Target, Position } from '../stores/gameStore'
 import { useAuthStore } from '../stores/authStore'
@@ -64,10 +64,34 @@ export default function Game() {
   const [targetCount, setTargetCount] = useState(5)
   const [showResults, setShowResults] = useState(false)
   const [resultSaved, setResultSaved] = useState(false)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [useAI, setUseAI] = useState(false)
+  const [isAIGenerated, setIsAIGenerated] = useState(false)
+  const timerRef = useRef<number | null>(null)
 
-  // Calculate stats
+  // Timer effect - updates every 100ms while playing
+  useEffect(() => {
+    if (isPlaying && !isFinished && startTime) {
+      timerRef.current = window.setInterval(() => {
+        setCurrentTime(Date.now())
+      }, 100)
+    } else {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+      }
+    }
+  }, [isPlaying, isFinished, startTime])
+
+  // Calculate stats with live timer
   const elapsedTime = startTime 
-    ? ((endTime || Date.now()) - startTime) / 1000 
+    ? ((isFinished && endTime ? endTime : currentTime || Date.now()) - startTime) / 1000 
     : 0
   
   const avgTimePerTarget = targetsCompleted > 0 
@@ -79,12 +103,14 @@ export default function Game() {
     setIsLoading(true)
     setShowResults(false)
     setResultSaved(false)
+    setIsAIGenerated(false)
     
     try {
-      const response = await typingApi.getSnippet(language)
-      const { lines: codeLines } = response.data
+      const response = await typingApi.getSnippet(language, useAI)
+      const { lines: codeLines, ai_generated } = response.data
       const generatedTargets = generateTargets(codeLines, targetCount)
       initGame(codeLines, generatedTargets)
+      setIsAIGenerated(ai_generated || false)
     } catch (error) {
       console.error('Failed to load snippet:', error)
       // Fallback code
@@ -99,7 +125,7 @@ export default function Game() {
     }
     
     setIsLoading(false)
-  }, [language, targetCount, initGame])
+  }, [language, targetCount, useAI, initGame])
 
   // Load game on mount and language change
   useEffect(() => {
@@ -172,6 +198,25 @@ export default function Game() {
                 <option key={count} value={count}>{count}</option>
               ))}
             </select>
+          </div>
+
+          {/* AI Toggle */}
+          <div className="flex items-center gap-2">
+            <label className="text-vim-subtext text-sm">AI Code:</label>
+            <button
+              onClick={() => setUseAI(!useAI)}
+              disabled={isPlaying}
+              className={`px-3 py-2 rounded-lg border transition-colors disabled:opacity-50 ${
+                useAI 
+                  ? 'bg-vim-green/20 border-vim-green text-vim-green' 
+                  : 'bg-vim-surface border-vim-overlay text-vim-subtext hover:text-vim-text'
+              }`}
+            >
+              {useAI ? '✨ On' : 'Off'}
+            </button>
+            {isAIGenerated && (
+              <span className="text-vim-green text-xs">✨ AI Generated</span>
+            )}
           </div>
         </div>
 
