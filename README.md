@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MonkeyType Clone
 
 A typing test application inspired by MonkeyType, built with React, Flask, and MongoDB.
@@ -10,6 +11,9 @@ A typing test application inspired by MonkeyType, built with React, Flask, and M
 - 🏆 Global leaderboards
 - 📈 Personal statistics and history
 - 🎨 Clean, minimal UI inspired by MonkeyType
+=======
+# Features
+>>>>>>> fd698e40d90af599d38b532cdb50b0a46a6af99e
 
 ## Tech Stack
 
@@ -17,7 +21,11 @@ A typing test application inspired by MonkeyType, built with React, Flask, and M
 - **Backend**: Python, Flask, Flask-PyMongo
 - **Database**: MongoDB
 
+<<<<<<< HEAD
 ## Prerequisites
+=======
+## Requirements
+>>>>>>> fd698e40d90af599d38b532cdb50b0a46a6af99e
 
 - Node.js 18+
 - Python 3.10+
