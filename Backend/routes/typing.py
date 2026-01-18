@@ -319,33 +319,6 @@ def get_vim_challenge():
     }), 200
 
 
-@typing_bp.route('/generate', methods=['POST'])
-def generate_snippet():
-    """Generate a new code snippet using AI."""
-    if not OPENAI_API_KEY:
-        return jsonify({'error': 'AI generation not configured. Set OPENAI_API_KEY environment variable.'}), 503
-    
-    data = request.get_json() or {}
-    language = data.get('language', 'python').lower()
-    
-    if language not in SUPPORTED_LANGUAGES:
-        return jsonify({'error': f'Unsupported language. Choose from: {SUPPORTED_LANGUAGES}'}), 400
-    
-    snippet = generate_ai_snippet(language)
-    
-    if not snippet:
-        return jsonify({'error': 'Failed to generate code snippet'}), 500
-    
-    return jsonify({
-        'language': language,
-        'code': snippet,
-        'lines': snippet.split('\n'),
-        'line_count': len(snippet.split('\n')),
-        'char_count': len(snippet),
-        'ai_generated': True
-    }), 200
-
-
 @typing_bp.route('/snippets', methods=['GET'])
 def get_snippets():
     """Get multiple code snippets for a session."""

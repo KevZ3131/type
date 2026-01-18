@@ -51,9 +51,6 @@ export const typingApi = {
   getSnippet: (language: string, useAI: boolean = false) =>
     api.get(`/typing/snippet?language=${language}&ai=${useAI}`),
   
-  generateSnippet: (language: string) =>
-    api.post('/typing/generate', { language }),
-  
   getVimChallenge: (language: string, targetCount: number = 5, weaknesses: string[] = []) =>
     api.post('/typing/vim-challenge', { language, target_count: targetCount, weaknesses }),
   
