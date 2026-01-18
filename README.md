@@ -50,7 +50,7 @@ pip install -r requirements.txt
 cp .env.example .env
 
 6. Edit .env with MongoDB connection string:
-MONGO_URI=mongodb://localhost:27017/monkeytype
+MONGO_URI=
 
 7. Initialize database indexes:
 flask init-db
