@@ -1,6 +1,24 @@
+import React from 'react'
+
 interface HelpModalProps {
   isOpen: boolean
   onClose: () => void
+}
+
+interface ShortcutItemProps {
+  shortcut: string
+  description: string
+}
+
+function ShortcutItem({ shortcut, description }: ShortcutItemProps) {
+  return (
+    <div className="flex items-center gap-3 bg-vim-bg rounded-lg p-3">
+      <kbd className="bg-vim-overlay px-3 py-1.5 rounded text-vim-green font-mono text-sm font-semibold min-w-[80px] text-center">
+        {shortcut}
+      </kbd>
+      <span className="text-vim-subtext text-sm">{description}</span>
+    </div>
+  )
 }
 
 export default function HelpModal({ isOpen, onClose }: HelpModalProps) {
@@ -137,22 +155,6 @@ export default function HelpModal({ isOpen, onClose }: HelpModalProps) {
           </section>
         </div>
       </div>
-    </div>
-  )
-}
-
-interface ShortcutItemProps {
-  shortcut: string
-  description: string
-}
-
-function ShortcutItem({ shortcut, description }: ShortcutItemProps) {
-  return (
-    <div className="flex items-center gap-3 bg-vim-bg rounded-lg p-3">
-      <kbd className="bg-vim-overlay px-3 py-1.5 rounded text-vim-green font-mono text-sm font-semibold min-w-[80px] text-center">
-        {shortcut}
-      </kbd>
-      <span className="text-vim-subtext text-sm">{description}</span>
     </div>
   )
 }
