@@ -620,7 +620,18 @@ export default function VimEditor({ onTargetReached }: VimEditorProps) {
       // Prevent default for vim keys
       if (!e.ctrlKey && !e.altKey && !e.metaKey) {
         e.preventDefault()
-        handleVimMotion(e.key, inputBuffer)
+        
+        // Map arrow keys to Vim motions
+        const arrowKeyMap: Record<string, string> = {
+          'ArrowUp': 'k',
+          'ArrowDown': 'j',
+          'ArrowLeft': 'h',
+          'ArrowRight': 'l'
+        }
+        
+        // Use mapped key if it's an arrow key, otherwise use the original key
+        const key = arrowKeyMap[e.key] || e.key
+        handleVimMotion(key, inputBuffer)
       }
     }
 
