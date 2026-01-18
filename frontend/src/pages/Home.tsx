@@ -4,7 +4,7 @@ export default function Home() {
   const features = [
     {
       icon: '⌨️',
-      title: 'Vim Motions',
+      title: 'Navigation',
       description: 'Practice essential Vim navigation commands like h, j, k, l, w, b, f, and more',
     },
     {
@@ -25,7 +25,7 @@ export default function Home() {
   ]
 
   const commands = [
-    { key: 'h j k l', desc: 'Basic movement' },
+    { key: 'h/left j/down k/up l/right', desc: 'Basic movement' },
     { key: 'w b e', desc: 'Word motions' },
     { key: '0 ^ $', desc: 'Line navigation' },
     { key: 'gg G', desc: 'Document navigation' },
@@ -37,11 +37,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="text-center py-16">
         <h1 className="text-5xl font-bold text-vim-text mb-4">
-          Master <span className="text-vim-green">Vim</span> Motions
+          Master <span className="text-vim-green">Vim</span>
         </h1>
         <p className="text-xl text-vim-subtext mb-8 max-w-2xl mx-auto">
-          Race against time to navigate code using Vim commands. 
-          Improve your editing speed and become a Vim power user.
+          Improve your time with navigating code using Vim commands.
+          Are you ready to become a cracked Vim user?
         </p>
         <div className="flex items-center justify-center gap-4">
           <Link
