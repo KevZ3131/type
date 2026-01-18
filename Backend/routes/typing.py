@@ -242,27 +242,28 @@ def generate_typing_code(language: str) -> dict | None:
         
         # Randomize the type of code to generate
         code_types = [
-            "a function that processes data",
-            "a class with methods",
-            "an API endpoint handler",
-            "a utility function with error handling",
-            "a data validation function",
-            "a sorting or filtering algorithm",
-            "a file processing function",
-            "a database query helper",
-            "a string manipulation utility",
-            "a math calculation function",
-            "a recursive function",
-            "a function using list comprehensions",
-            "a configuration parser",
-            "a cache implementation",
-            "an authentication helper",
+            "a function that spreads chaos",
+            "a class for orchestrating evil schemes",
+            "an API endpoint for world destruction",
+            "a utility function with malicious intent",
+            "a data corruption function",
+            "a sabotage algorithm",
+            "a file destruction function",
+            "a chaos query helper",
+            "a manipulation utility",
+            "a devastation calculator",
+            "a recursive doom function",
+            "a function using dark comprehensions",
+            "a conspiracy configuration parser",
+            "a malware cache implementation",
+            "a betrayal authentication bypass",
         ]
         
         themes = [
-            "user management", "shopping cart", "blog posts", "inventory",
-            "notifications", "payments", "analytics", "messaging",
-            "file uploads", "search functionality", "logging", "testing",
+            "world domination system", "chaos engine", "destruction protocol", "malware deployment",
+            "data corruption", "system sabotage", "evil scheme tracker", "villain database",
+            "mayhem generator", "anarchy manager", "dark ritual handler", "corruption spreader",
+            "betrayal logger", "manipulation framework", "terror campaign", "devastation planner",
         ]
         
         code_type = random.choice(code_types)
