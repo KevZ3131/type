@@ -158,6 +158,14 @@ function applySingleMotion(motion: string, pos: Position, lines: string[]): Posi
   }
 }
 
+// Map arrow keys to Vim motions
+const ARROW_KEY_MAP: Record<string, string> = {
+  'ArrowUp': 'k',
+  'ArrowDown': 'j',
+  'ArrowLeft': 'h',
+  'ArrowRight': 'l'
+}
+
 export default function VimEditor({ onTargetReached }: VimEditorProps) {
   const {
     lines,
@@ -621,16 +629,8 @@ export default function VimEditor({ onTargetReached }: VimEditorProps) {
       if (!e.ctrlKey && !e.altKey && !e.metaKey) {
         e.preventDefault()
         
-        // Map arrow keys to Vim motions
-        const arrowKeyMap: Record<string, string> = {
-          'ArrowUp': 'k',
-          'ArrowDown': 'j',
-          'ArrowLeft': 'h',
-          'ArrowRight': 'l'
-        }
-        
         // Use mapped key if it's an arrow key, otherwise use the original key
-        const key = arrowKeyMap[e.key] || e.key
+        const key = ARROW_KEY_MAP[e.key] || e.key
         handleVimMotion(key, inputBuffer)
       }
     }
